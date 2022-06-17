@@ -22,8 +22,8 @@ public class MemberController {
 	//비인증 상태에서도 접근 가능하도록 /guest/ 이하로 url 등록 
 	//org.kosta.myproject.config.security.WebSecurityConfig 설정되어 있음 
 	@RequestMapping("guest/findMemberById")
-	public String findMemberById(String id,Model model) {		
-		MemberVO vo = memberService.findMemberById(id);
+	public String findMemberById(String memberId,Model model) {		
+		MemberVO vo = memberService.findMemberById(memberId);
 		if (vo == null)
 			return "member/findMemberById_fail";
 		else {
@@ -45,8 +45,8 @@ public class MemberController {
 	
 	@RequestMapping("guest/idcheckAjax")
 	@ResponseBody
-	public String idcheckAjax(String id) {
-		return memberService.idcheck(id);
+	public String idcheckAjax(String memberId) {
+		return memberService.idcheck(memberId);
 	}
 	@GetMapping("getMemberTotalCount")	
 	@ResponseBody
@@ -89,12 +89,12 @@ public class MemberController {
 	@PostMapping("guest/registerMember")
 	public String register(MemberVO memberVO) {
 		memberService.registerMember(memberVO);//등록시 service에서 비밀번호를 암호화 한다 
-		return "redirect:/guest/registerResultView?id=" + memberVO.getMemberId();
+		return "redirect:/guest/registerResultView?memberId=" + memberVO.getMemberId();
 	}
 
 	@RequestMapping("guest/registerResultView")
-	public ModelAndView registerResultView(String id) {
-		MemberVO memberVO = memberService.findMemberById(id);
+	public ModelAndView registerResultView(String memberId) {
+		MemberVO memberVO = memberService.findMemberById(memberId);
 		return new ModelAndView("member/register_result", "memberVO", memberVO);
 	}
 

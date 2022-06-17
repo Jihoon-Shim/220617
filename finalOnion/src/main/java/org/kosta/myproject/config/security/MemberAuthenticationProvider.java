@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.kosta.myproject.service.MemberService;
-import org.kosta.myproject.vo.Authority;
 import org.kosta.myproject.vo.MemberVO;
+import org.kosta.myproject.vo.PowerVO;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
@@ -64,7 +64,8 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 			return null;
 		}
 		//2.사용자 정보 DB로부터 조회
-		String id = authentication.getName();//사용자가 로그인시 입력한 ID 반환 		
+		String id = authentication.getName();//사용자가 로그인시 입력한 ID 반환 
+		System.out.println("아이디 정보입니다"+id);
 		MemberVO member = memberService.findMemberById(id);
 		if(member == null){
 			throw new UsernameNotFoundException("회원 아이디가 존재하지 않습니다");
@@ -85,7 +86,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
         if (!passwordEncoder.matches(password, member.getMemberPassword()))//! 비밀번호가 일치하지 않으면  
                 throw new BadCredentialsException("비밀번호가 일치하지 않습니다");
 		//4.사용자 권한 조회
-		List<Authority> list = memberService.findAuthorityByUsername(id);
+		List<PowerVO> list = memberService.findAuthorityByUsername(id);
 		// 권한이 하나 이상 없으면 자격 증명이 불충분한 것으로 판단한다
 		// ( 회원가입시 ROLE_MEMBER 로 권한이 자동 등록되도록 MemberService 에 구현되어 있음 ) 
 		if(list.size() == 0){ 
@@ -93,7 +94,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 		}
 		// 회원과 권한이 1 대 다 이므로 권한을 리스트로 저장해서 반환할 Authentication 에 할당한다 
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();		
-		for(Authority au : list){ // ROLE_ 형식의 db 정보가 아니라면 이 시점에 ROLE_ 를 접두어로 추가한다
+		for(PowerVO au : list){ // ROLE_ 형식의 db 정보가 아니라면 이 시점에 ROLE_ 를 접두어로 추가한다
 			authorities.add(new SimpleGrantedAuthority(au.getAuthority()));
 		}
 				

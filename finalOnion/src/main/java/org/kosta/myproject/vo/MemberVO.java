@@ -13,6 +13,6 @@ public class MemberVO implements Serializable{
 	private String memberTel;
 	private int onionPoint;
 	private String memberNickname;
-	private String memberPickture;
+	private String memberPicture;
 	private int enabled;
 }

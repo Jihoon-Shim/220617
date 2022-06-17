@@ -5,7 +5,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div  th:fragment="leftFragment" id="left"	class="col-sm-3 sidenav">
 	<form id="findForm" th:action="@{/guest/findMemberById}">
-		<input type="text" name="id" size="5" placeholder="아이디"> <input
+		<input type="text" name="memberId" size="5" placeholder="아이디"> <input
 			type="submit" value="검색">
 	</form>
 	<br>   
@@ -21,8 +21,8 @@
 		        자동으로 csrt token hidden 이 생성된다 (소스보기로 확인해본다)
 	*/-->
 	<form th:action="@{/login}"   action="/login" method="post" id="loginForm" sec:authorize="isAuthenticated()==false">	
-		<input type="text" name="id" size="10" placeholder="아이디"><br>
-		<input type="password" name="password" size="10" placeholder="비밀번호"><br>
+		<input type="text" name="memberId" size="10" placeholder="아이디"><br>
+		<input type="password" name="memberPassword" size="10" placeholder="비밀번호"><br>
 		<input type="submit" value="로그인">
 	</form>
 	<br>
@@ -34,7 +34,7 @@
 	*/-->
 	<th:block sec:authorize="isAuthenticated()">
 	<!--/*   sec:authentication="principal" 방식으로 로그인한 회원 정보에 접근할 수 있다     */-->
-	<span sec:authentication="principal.name"></span>님 <br>
+	<span sec:authentication="principal.memberName"></span>님 <br>
 	<a href="#" id="logoutAction">로그아웃</a><br>	
 	<form id="logoutForm" th:action="@{/logout}" method="post" style="display: none"></form>
 	<script type="text/javascript">

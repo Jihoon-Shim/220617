@@ -2,16 +2,16 @@ package org.kosta.myproject.service;
 
 import java.util.List;
 
-import org.kosta.myproject.vo.Authority;
 import org.kosta.myproject.vo.MemberVO;
+import org.kosta.myproject.vo.PowerVO;
 
 public interface MemberService {
 	
-	MemberVO findMemberById(String id);
+	MemberVO findMemberById(String memberId);
 
 	List<String> getAddressList();
 
-	List<MemberVO> findMemberListByAddress(String address);
+	List<MemberVO> findMemberListByAddress(String memberAddress);
 
 	int getMemberCount();
 
@@ -19,7 +19,7 @@ public interface MemberService {
 
 	void registerMember(MemberVO vo);
 
-	String idcheck(String id);
+	String idcheck(String memberId);
 	
-	List<Authority> findAuthorityByUsername(String username);
+	List<PowerVO> findAuthorityByUsername(String username);
 }
