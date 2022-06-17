@@ -23,12 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select count(*) from security_member
  	</select>
  	<update id="updateMember" parameterType="MemberVO">
-		update security_member set password=#{password},name=#{name},address=#{address}
-		where id=#{id}
+		update security_member set password=#{memberPassword},name=#{memberName},address=#{memberAddress}
+		where id=#{memeberId}
 	</update>
-	<insert id="registerMember" parameterType="MemberVO">
+	<insert id="registerMember" parameterType="org.kosta.myproject.vo.MemberVO">
 		insert into security_member(id,password,name,address)
-		values(#{id},#{password},#{name},#{address})
+		values(#{memberId},#{memberPassword},#{memberName},#{memberAddress})
 	</insert>
 	<select id="idcheck" resultType="int">
 		select count(*) from security_member where id=#{value}
@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	      사용가능한(enabled 1) 계정일 경우만 조회. 
 	 -->
 	<select id="findMemberById" resultType="MemberVO">
- 		SELECT	id,	password,	name, address, enabled
+ 		SELECT	id,	password,name, address, enabled
 		FROM	security_member
 		WHERE 	id=#{value}	
 		AND		enabled=1 		

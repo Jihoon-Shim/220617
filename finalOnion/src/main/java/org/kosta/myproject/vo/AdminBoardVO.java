@@ -7,14 +7,10 @@ import lombok.Data;
 @Data
 public class AdminBoardVO implements Serializable{
 	private static final long serialVersionUID = 6440047762418162093L;
-	private int boardNo;
-	private String boardTitle;
-	private Date boardDate;
-	private String boardContent;
-	private String boardKind;
-	private int tradeStatus;
-	private int tradePrice;
-	private String productPicture;
-	private int hits;
+	private int adminBoardNo;
+	private String adminBoardTitle;
+	private Date adminBoardDate;
+	private String adminBoardContent;
+	private String adminBoardKind;
 	private MemberVO memberVO;
 }

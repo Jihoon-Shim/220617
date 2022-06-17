@@ -70,7 +70,7 @@ public class MemberController {
 	@PostMapping("updateMemberAction")
 	//첫번째 매개변수 Authentication : Spring Security 인증 정보 , 두번째 매개변수 memberVO : 수정폼에서 전달받는 데이터 
 	public String updateMemberAction(Authentication authentication, MemberVO memberVO) {
-		MemberVO vo = (MemberVO)authentication.getPrincipal();			
+		MemberVO vo = (MemberVO)authentication.getPrincipal();
 		memberService.updateMember(memberVO);//service에서 변경될 비밀번호를 암호화한다 
 		// 수정한 회원정보로 Spring Security 회원정보를 업데이트한다
 		vo.setMemberPassword(memberVO.getMemberPassword());

@@ -7,13 +7,13 @@ drop table authorities;
 drop table security_member;
 -- enabled : 탈퇴여부(0은 탈퇴, 1은 가입상태) 
 create table security_member(
-	id varchar2(100) primary key,
-	password varchar2(100) not null,
-	name varchar2(100) not null,
-	address varchar2(100) not null,
+	member_id varchar2(100) primary key,
+	member_password varchar2(100) not null,
+	member_name varchar2(100) not null,
+	member_address varchar2(100) not null,
 	enabled number default 1 not null 
 )
-
+insert into security_member values('java', 'a','아이유', '오리', 1)
 
 delete from security_member;
 commit
@@ -26,7 +26,7 @@ drop table authorities;
 create table authorities(
 	username varchar2(100) not null,
 	authority varchar2(30) not null,
-	constraint fk_authorities foreign key(username) references security_member(id),
+	constraint fk_authorities foreign key(username) references security_member(member_id),
 	constraint member_authorities primary key(username,authority)
 )
 delete from authorities;

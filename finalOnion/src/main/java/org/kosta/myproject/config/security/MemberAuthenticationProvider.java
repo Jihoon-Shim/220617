@@ -82,8 +82,11 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
            단방향 암호화 해싱함수의 bcrypt 암호화 기법을 이용하므로 복호화는 불가능하고  
 	       비교만 가능함 ( 비밀번호 찾기는 불가능하고 교체만 가능 )  
 	    */
-        if (!passwordEncoder.matches(password, member.getMemberPassword()))//! 비밀번호가 일치하지 않으면  
-                throw new BadCredentialsException("비밀번호가 일치하지 않습니다");
+        if (!passwordEncoder.matches(password, member.getMemberPassword())){//! 비밀번호가 일치하지 않으면  
+            System.out.println(member.getMemberPassword());
+            System.out.println(password);
+        	throw new BadCredentialsException("비밀번호가 일치하지 않습니다");
+        }
 		//4.사용자 권한 조회
 		List<Authority> list = memberService.findAuthorityByUsername(id);
 		// 권한이 하나 이상 없으면 자격 증명이 불충분한 것으로 판단한다
