@@ -27,11 +27,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id=#{id}
 	</update>
 	<insert id="registerMember" parameterType="MemberVO">
-		insert into security_member(id,password,name,address)
-		values(#{id},#{password},#{name},#{address})
+		insert into t_member(memberId, memberName, memberPassword, memberAddress, 0, '사진', 1, '010-1234-5678')
+		values(#{memberId},#{memberName},#{memberPassword},#{memberAddress})
 	</insert>
 	<select id="idcheck" resultType="int">
-		select count(*) from security_member where id=#{value}
+		select count(*) from t_member where memberId=#{value}
 	</select>
 	<!--  -->
 	<insert id="registerRole" parameterType="authority">
