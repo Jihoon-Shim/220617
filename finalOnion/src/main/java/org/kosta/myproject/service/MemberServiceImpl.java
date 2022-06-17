@@ -27,19 +27,19 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void registerMember(MemberVO memberVO) {
 		// 비밀번호를 bcrypt 알고리즘으로 암호화하여 DB에 저장한다
-		String encodedPwd = passwordEncoder.encode(memberVO.getPassword());
-		memberVO.setPassword(encodedPwd);
+		String encodedPwd = passwordEncoder.encode(memberVO.getMemberPassword());
+		memberVO.setMemberPassword(encodedPwd);
 		memberMapper.registerMember(memberVO);
 		// 회원 가입시 반드시 권한이 등록되도록 트랜잭션처리를 한다
-		Authority authority = new Authority(memberVO.getId(), "ROLE_MEMBER");
+		Authority authority = new Authority(memberVO.getMemberId(), "ROLE_MEMBER");
 		memberMapper.registerRole(authority);
 	}
 
 	@Override
 	public void updateMember(MemberVO memberVO) {
 		// 변경할 비밀번호를 암호화한다
-		String encodePassword = passwordEncoder.encode(memberVO.getPassword());
-		memberVO.setPassword(encodePassword);
+		String encodePassword = passwordEncoder.encode(memberVO.getMemberPassword());
+		memberVO.setMemberPassword(encodePassword);
 		memberMapper.updateMember(memberVO);
 	}
 
