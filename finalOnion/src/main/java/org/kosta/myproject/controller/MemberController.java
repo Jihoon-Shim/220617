@@ -89,7 +89,11 @@ public class MemberController {
 	@PostMapping("guest/registerMember")
 	public String register(MemberVO memberVO) {
 		memberService.registerMember(memberVO);//등록시 service에서 비밀번호를 암호화 한다 
+<<<<<<< HEAD
 		return "redirect:/guest/registerResultView?memberId=" + memberVO.getMemberId();
+=======
+		return "redirect:/guest/registerResultView?id=" + memberVO.getMemberId();
+>>>>>>> branch 'main' of https://github.com/Jihoon-Shim/220617.git
 	}
 
 	@RequestMapping("guest/registerResultView")
