@@ -75,7 +75,10 @@ public class MemberController {
 		// 수정한 회원정보로 Spring Security 회원정보를 업데이트한다
 		vo.setMemberPassword(memberVO.getMemberPassword());
 		vo.setMemberName(memberVO.getMemberName());
-		vo.setMemberAddress(memberVO.getMemberAddress());	
+		vo.setMemberAddress(memberVO.getMemberAddress());
+		vo.setMemberNickname(memberVO.getMemberNickname());
+		vo.setMemberPicture(memberVO.getMemberPicture());
+		vo.setMemberTel(memberVO.getMemberTel());
 		return "redirect:updateResult";
 	}
 	@GetMapping("updateResult")
@@ -89,7 +92,7 @@ public class MemberController {
 	@PostMapping("guest/registerMember")
 	public String register(MemberVO memberVO) {
 		memberService.registerMember(memberVO);//등록시 service에서 비밀번호를 암호화 한다 
-		return "redirect:/guest/registerResultView?memberId=" + memberVO.getMemberId();
+		return "redirect:/guest/registerResultView?id=" + memberVO.getMemberId();
 	}
 
 	@RequestMapping("guest/registerResultView")

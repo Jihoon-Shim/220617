@@ -20,22 +20,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		where id=#{id} and password=#{password}
  	</select> -->
  	<select id="getMemberCount" resultType="int">
- 		select count(*) from security_member
+ 		select count(*) from t_member
  	</select>
  	<update id="updateMember" parameterType="MemberVO">
-		update security_member set password=#{memberPassword},name=#{memberName},address=#{memberAddress}
-		where id=#{memeberId}
+		update t_member set memberPassword=#{memberPassword},memberName=#{memberName},memberAddress=#{memberAddress}
+		where memberId=#{memberId}
 	</update>
-	<insert id="registerMember" parameterType="org.kosta.myproject.vo.MemberVO">
-		insert into security_member(id,password,name,address)
-		values(#{memberId},#{memberPassword},#{memberName},#{memberAddress})
+	<insert id="registerMember" parameterType="MemberVO">
+		insert into t_member
+		values(#{memberId},#{memberName},#{memberPassword},#{memberAddress}, 0,'어렵다', '사진', 1, '010-1234-5678')
 	</insert>
 	<select id="idcheck" resultType="int">
-		select count(*) from security_member where member_id=#{value}
+		select count(*) from t_member where memberId=#{value}
 	</select>
 	<!--  -->
 	<insert id="registerRole" parameterType="authority">
-		insert into authorities(username,authority) values(#{username},#{authority})
+		insert into AUTHORITY values(#{username},#{authority})
 	</insert>
 	<!-- Spring Security에서 로그인 인증시 사용 : 
 	      사용가능한(enabled 1) 계정일 경우만 조회. 
@@ -44,13 +44,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		SELECT	*
 		FROM	t_member
 		WHERE 	memberId=#{value}	
-		AND		enabled=1
+		AND		enabled=1 		
  	</select>
 	<!-- Spring Security에서 권한 체크를 위해 사용 -->
 	<select id="findAuthorityByUsername"  resultType="authority">
-		SELECT	username,authority
-		FROM	authorities
-		WHERE	username=#{username}
+		SELECT	memberId, authority
+		FROM	authority
+		WHERE	memberId=#{username}
 	</select>
 </mapper>
 

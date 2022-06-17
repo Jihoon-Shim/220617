@@ -34,7 +34,7 @@
 	*/-->
 	<th:block sec:authorize="isAuthenticated()">
 	<!--/*   sec:authentication="principal" 방식으로 로그인한 회원 정보에 접근할 수 있다     */-->
-	<span sec:authentication="principal.name"></span>님 <br>
+	<span sec:authentication="principal.memberName"></span>님 <br>
 	<a href="#" id="logoutAction">로그아웃</a><br>	
 	<form id="logoutForm" th:action="@{/logout}" method="post" style="display: none"></form>
 	<script type="text/javascript">
