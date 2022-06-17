@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{memberId},#{memberPassword},#{memberName},#{memberAddress})
 	</insert>
 	<select id="idcheck" resultType="int">
-		select count(*) from security_member where id=#{value}
+		select count(*) from security_member where member_id=#{value}
 	</select>
 	<!--  -->
 	<insert id="registerRole" parameterType="authority">

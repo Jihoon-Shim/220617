@@ -40,7 +40,7 @@
 			$.ajax({
 				type:"get",
 				url:"/guest/idcheckAjax",				
-				data:"id="+id,	
+				data:"memberId="+id,	
 				success:function(data){						
 					if(data=="fail"){
 					$("#idCheckView").html(id+" 사용불가!").css("background","red");
