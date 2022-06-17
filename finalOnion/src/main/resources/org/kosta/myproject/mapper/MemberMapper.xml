@@ -41,10 +41,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	      사용가능한(enabled 1) 계정일 경우만 조회. 
 	 -->
 	<select id="findMemberById" resultType="MemberVO">
- 		SELECT	id,	password,name, address, enabled
-		FROM	security_member
-		WHERE 	id=#{value}	
-		AND		enabled=1 		
+ 		SELECT	*
+		FROM	t_member
+		WHERE 	memberId=#{value}	
+		AND		enabled=1
  	</select>
 	<!-- Spring Security에서 권한 체크를 위해 사용 -->
 	<select id="findAuthorityByUsername"  resultType="authority">
