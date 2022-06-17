@@ -4,12 +4,15 @@ import java.io.Serializable;
 
 import lombok.Data;
 @Data
-public class MemberVO implements Serializable{	
+public class MemberVO implements Serializable{
 	private static final long serialVersionUID = 6440047762418162093L;
-	private String id;
-	private String password;
-	private String name;
-	private String address;
-	private String enabled;
-	
+	private String memberId;
+	private String memberName;
+	private String memberPassword;
+	private String memberAddress;
+	private String memberTel;
+	private int onionPoint;
+	private String memberNickname;
+	private String memberPickture;
+	private int enabled;
 }
