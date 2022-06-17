@@ -21,8 +21,8 @@
 		        자동으로 csrt token hidden 이 생성된다 (소스보기로 확인해본다)
 	*/-->
 	<form th:action="@{/login}"   action="/login" method="post" id="loginForm" sec:authorize="isAuthenticated()==false">	
-		<input type="text" name="memberId" size="10" placeholder="아이디"><br>
-		<input type="password" name="memberPassword" size="10" placeholder="비밀번호"><br>
+		<input type="text" name="id" size="10" placeholder="아이디"><br>
+		<input type="password" name="password" size="10" placeholder="비밀번호"><br>
 		<input type="submit" value="로그인">
 	</form>
 	<br>

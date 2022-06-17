@@ -48,9 +48,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
 	<!-- Spring Security에서 권한 체크를 위해 사용 -->
 	<select id="findAuthorityByUsername"  resultType="PowerVO">
-		SELECT	username,authority
+		SELECT	MEMBERID,AUTHORITY
 		FROM	AUTHORITY
-		WHERE username=#{username}
+		WHERE MEMBERID=#{username}
 	</select>
 </mapper>
 
