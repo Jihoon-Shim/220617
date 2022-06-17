@@ -3,16 +3,16 @@ package org.kosta.myproject.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.kosta.myproject.vo.Authority;
 import org.kosta.myproject.vo.MemberVO;
+import org.kosta.myproject.vo.PowerVO;
 @Mapper
 public interface MemberMapper {
 
-	MemberVO findMemberById(String id);
+	MemberVO findMemberById(String memberId);
 
 	List<String> getAddressList();
 
-	List<MemberVO> findMemberListByAddress(String address);	
+	List<MemberVO> findMemberListByAddress(String memberAddress);	
 
 	int getMemberCount();
 
@@ -20,10 +20,10 @@ public interface MemberMapper {
 
 	void registerMember(MemberVO vo);
 
-	int idcheck(String id);
+	int idcheck(String memberId);
 
-	List<Authority> findAuthorityByUsername(String username);
+	List<PowerVO> findAuthorityByUsername(String username);
 
-	void registerRole(Authority authority);
+	void registerRole(PowerVO authority);
 
 }
