@@ -37,6 +37,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void updateMember(MemberVO memberVO) {
+		System.out.println("확인용입니다 : "+memberVO);
 		// 변경할 비밀번호를 암호화한다
 		String encodePassword = passwordEncoder.encode(memberVO.getMemberPassword());
 		memberVO.setMemberPassword(encodePassword);
