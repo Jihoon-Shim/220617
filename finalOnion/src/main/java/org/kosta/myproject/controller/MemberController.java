@@ -75,7 +75,9 @@ public class MemberController {
 		// 수정한 회원정보로 Spring Security 회원정보를 업데이트한다
 		vo.setMemberPassword(memberVO.getMemberPassword());
 		vo.setMemberName(memberVO.getMemberName());
-		vo.setMemberAddress(memberVO.getMemberAddress());	
+		vo.setMemberAddress(memberVO.getMemberAddress());
+		vo.setMemberNickname(memberVO.getMemberNickname());
+		vo.setMemberTel(memberVO.getMemberTel());
 		return "redirect:updateResult";
 	}
 	@GetMapping("updateResult")

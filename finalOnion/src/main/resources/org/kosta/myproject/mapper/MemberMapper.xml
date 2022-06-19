@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select count(*) from T_MEMBER
  	</select>
  	<update id="updateMember" parameterType="MemberVO">
-		update T_MEMBER set MEMBER_PASSWORD=#{memberPassword},MEMBER_NAME=#{memberName},MEMBER_ADDRESS=#{memberAddress}
+		update T_MEMBER set MEMBER_PASSWORD=#{memberPassword},MEMBER_NAME=#{memberName},MEMBER_ADDRESS=#{memberAddress}, MEMBER_NICKNAME=#{memberNickname},MEMBER_TEL=#{memberTel}
 		where MEMBERID=#{memberId}
 	</update>
 	<insert id="registerMember" parameterType="MemberVO">
@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	      사용가능한(enabled 1) 계정일 경우만 조회. 
 	 -->
 	<select id="findMemberById" resultType="MemberVO">
- 		SELECT	MEMBERID,	MEMBER_PASSWORD,	MEMBER_NAME, MEMBER_ADDRESS, enabled
+ 		SELECT	MEMBERID,	MEMBER_PASSWORD,	MEMBER_NAME, MEMBER_ADDRESS, enabled , MEMBER_NICKNAME,MEMBER_PICTURE,MEMBER_TEL
 		FROM	T_MEMBER
 		WHERE 	MEMBERID=#{value}	
 		AND		enabled=1 		
