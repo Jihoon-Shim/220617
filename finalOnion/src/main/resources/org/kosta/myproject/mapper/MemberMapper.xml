@@ -9,10 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</sql>
  	
  	<select id="getAddressList" resultType="string">
- 		select distinct address from security_member
+ 		select distinct MemberAddress from security_member
  	</select>
  	<select id="findMemberListByAddress" resultType="MemberVO">
- 		select id,name from security_member
+ 		select memberId,memberName from security_member
  		where memberAddress=#{value}
  	</select>
  	<!-- <select id="login" resultType="MemberVO" parameterType="MemberVO">
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- Spring Security에서 권한 체크를 위해 사용 -->
 	<select id="findAuthorityByUsername"  resultType="authority">
 		SELECT	username,authority
-		FROM	authorities
+		FROM	Authority
 		WHERE	username=#{username}
 	</select>
 </mapper>

@@ -29,9 +29,9 @@
 				return false;
 			}		
 		});
-		$("#regForm :input[memberName=memberId]").keyup(function(){
-			let memberId=$(this).val().trim();
-			if(memberId.length<4 || memberId.length>10){
+		$("#regForm :input[memberName=id]").keyup(function(){
+			let id=$(this).val().trim();
+			if(id.length<4 || i.length>10){
 				$("#idCheckView").html("아이디는 4자이상 10자 이하여야 함!").css(
 						"background","pink");
 				checkResultId="";
@@ -40,15 +40,15 @@
 			$.ajax({
 				type:"get",
 				url:"/guest/idcheckAjax",				
-				data:"memberId="+memberId,	
+				data:"id="+id,	
 				success:function(data){						
 					if(data=="fail"){
-					$("#idCheckView").html(memberId+" 사용불가!").css("background","red");
+					$("#idCheckView").html(id+" 사용불가!").css("background","red");
 						checkResultId="";
 					}else{						
-						$("#idCheckView").html(memberId+" 사용가능!").css(
+						$("#idCheckView").html(id+" 사용가능!").css(
 								"background","yellow");		
-						checkResultId=memberId;
+						checkResultId=id;
 					}					
 				}//callback			
 			});//ajax
