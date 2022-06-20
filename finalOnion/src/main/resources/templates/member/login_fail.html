@@ -17,11 +17,11 @@
           /*[[ ${} ]]*/
  */-->
 <script type="text/javascript" th:inline="javascript">
-//  org.kosta.myproject.config.security.MemberAuthenticationProvider 에서 throw 한 Exception 메세지가 출력
+//  org.kosta.myproject.config.security.MemberAuthenticationProvider 에서 throw 한 Exception 메세지가 출력*
 /*<![CDATA[*/ 
 	let info=/*[[ ${session.SPRING_SECURITY_LAST_EXCEPTION.message} ]]*/ null;
 	alert(info);
 	location.href="/";
-	/*]]*/	
+	/*]]*/
 </script>
 </html>

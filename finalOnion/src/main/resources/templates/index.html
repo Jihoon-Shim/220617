@@ -12,6 +12,25 @@
   layout:decorate="~{layouts/layout}"
 >
   <div layout:fragment="main">
-   	 <h4 th:text="${message}">home</h4>
-  </div>
+   	 <h4 th:text="${message}" align = "center">home</h4>
+   	 <th:block sec:authorize="isAuthenticated()">
+   	 <div class = "row">
+   	 	<div class="col-sm-4">
+			<h4>삽니다 게시판</h4>
+   	 		<br>
+   	 		<img th:src="@{/myweb/images/캡처.PNG}" height = "400" width = "400">
+		</div>
+  		<div class="col-sm-4">
+			<h4>팝니다 게시판</h4>
+   	 		<br>
+   	 		<img th:src="@{/myweb/images/캡처2.PNG}" height = "400" width = "400">
+		</div>
+		<div class="col-sm-4">
+			<h4>마이 페이지? 건의사항?</h4>
+   	 		<br>
+   	 		<img th:src="@{/myweb/images/캡처3.PNG}" height = "400" width = "400">
+		</div>
+   	 	</div>
+   	 	</th:block>
+   	  </div>
 </html>
