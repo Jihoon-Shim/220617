@@ -7,13 +7,13 @@ drop table Authority;
 drop table security_member;
 -- enabled : 탈퇴여부(0은 탈퇴, 1은 가입상태) 
 create table security_member(
-	memberId varchar2(100) primary key,
-	memberPassword varchar2(100) not null,
-	memberName varchar2(100) not null,
-	memberAddress varchar2(100) not null,
+	member_id varchar2(100) primary key,
+	member_password varchar2(100) not null,
+	member_name varchar2(100) not null,
+	member_address varchar2(100) not null,
 	enabled number default 1 not null 
 )
-
+insert into security_member values('java', 'a','아이유', '오리', 1)
 
 delete from security_member;
 commit
@@ -26,8 +26,8 @@ drop table Authority;
 create table Authority(
 	username varchar2(100) not null,
 	authority varchar2(30) not null,
-	constraint fk_Authority foreign key(username) references security_member(memberId),
-	constraint member_Authority primary key(username,authority)
+	constraint fk_authorities foreign key(username) references security_member(member_id),
+	constraint member_authorities primary key(username,authority)
 )
 delete from Authority;
 
@@ -39,7 +39,7 @@ select * from Authority;
 -----------------------------------------------------------
 --  인가 테스트를 위해 관리자 권한을 추가한 후
 --  AdminController의 @Secured("ROLE_ADMIN") 메서드를 브라우저로 테스트 해본다
-insert into  security_member(memberId , memberPassword , memberName , memberAddress , enabled)
+insert into  security_member(member_id , member_password , member_name , member_address , enabled)
 values ('king' , 'a' , '왕' , '한국' , 1);
 insert into Authority(username,authority) values('king','ROLE_ADMIN');
 commit

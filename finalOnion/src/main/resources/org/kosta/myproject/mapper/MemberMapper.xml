@@ -5,52 +5,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.myproject.mapper.MemberMapper">
  	<sql id="selectMember">
- 		select memberId,memberPassword,memberName,memberAddress from security_member
+ 		select MEMBERID,MEMBER_PASSWORD,MEMBER_NAME,MEMBER_ADDRESS from T_MEMBER
  	</sql>
  	
  	<select id="getAddressList" resultType="string">
- 		select distinct MemberAddress from security_member
+ 		select distinct MEMBER_ADDRESS from T_MEMBER
  	</select>
  	<select id="findMemberListByAddress" resultType="MemberVO">
- 		select memberId,memberName from security_member
- 		where memberAddress=#{value}
+ 		select MEMBERID,MEMBER_NAME from T_MEMBER
+ 		where MEMBER_ADDRESS=#{value}
  	</select>
  	<!-- <select id="login" resultType="MemberVO" parameterType="MemberVO">
  		<include refid="selectMember"></include>
  		where id=#{id} and password=#{password}
  	</select> -->
  	<select id="getMemberCount" resultType="int">
- 		select count(*) from security_member
+ 		select count(*) from T_MEMBER
  	</select>
  	<update id="updateMember" parameterType="MemberVO">
-		update security_member set memberPassword=#{memberPassword},memberName=#{memberName},memberAddress=#{memberAddress}
-		where memberId=#{memberId}
+		update T_MEMBER set MEMBER_PASSWORD=#{memberPassword},MEMBER_NAME=#{memberName},MEMBER_ADDRESS=#{memberAddress}, MEMBER_NICKNAME=#{memberNickname},MEMBER_TEL=#{memberTel}
+		where MEMBERID=#{memberId}
 	</update>
 	<insert id="registerMember" parameterType="MemberVO">
-		insert into security_member(memberId,memberPassword,memberName,memberAddress)
-		values(#{memberId},#{memberPassword},#{memberName},#{memberAddress})
+		insert into T_MEMBER(MEMBERID,MEMBER_NAME,MEMBER_PASSWORD,MEMBER_ADDRESS,ONION_POINT,MEMBER_NICKNAME,MEMBER_PICTURE,MEMBER_TEL,enabled)
+		values(#{memberId},#{memberName},#{memberPassword},#{memberAddress},#{onionPoint},#{memberNickname},#{memberNickname},#{memberTel},1)
 	</insert>
 	<select id="idcheck" resultType="int">
-		select count(*) from security_member where memberId=#{value}
+		select count(*) from T_MEMBER where MEMBERID=#{value}
 	</select>
 	<!--  -->
-	<insert id="registerRole" parameterType="Authority">
-		insert into Authority(username,authority) values(#{username},#{authority})
+	<insert id="registerRole" parameterType="PowerVO">
+		insert into AUTHORITY(MEMBERID,AUTHORITY) values(#{username},#{authority})
 	</insert>
 	<!-- Spring Security에서 로그인 인증시 사용 : 
 	      사용가능한(enabled 1) 계정일 경우만 조회. 
 	 -->
 	<select id="findMemberById" resultType="MemberVO">
- 		SELECT	memberId,	memberPassword,	memberName, memberAddress, enabled
-		FROM	security_member
-		WHERE 	memberId=#{value}	
+ 		SELECT	MEMBERID,	MEMBER_PASSWORD,	MEMBER_NAME, MEMBER_ADDRESS, enabled , MEMBER_NICKNAME,MEMBER_PICTURE,MEMBER_TEL
+		FROM	T_MEMBER
+		WHERE 	MEMBERID=#{value}	
 		AND		enabled=1 		
  	</select>
 	<!-- Spring Security에서 권한 체크를 위해 사용 -->
-	<select id="findAuthorityByUsername"  resultType="authority">
-		SELECT	username,authority
-		FROM	Authority
-		WHERE	username=#{username}
+	<select id="findAuthorityByUsername"  resultType="PowerVO">
+		SELECT	MEMBERID,AUTHORITY
+		FROM	AUTHORITY
+		WHERE MEMBERID=#{username}
 	</select>
 </mapper>
 

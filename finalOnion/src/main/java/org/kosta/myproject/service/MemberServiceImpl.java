@@ -3,8 +3,8 @@ package org.kosta.myproject.service;
 import java.util.List;
 
 import org.kosta.myproject.mapper.MemberMapper;
-import org.kosta.myproject.vo.Authority;
 import org.kosta.myproject.vo.MemberVO;
+import org.kosta.myproject.vo.PowerVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,12 +31,13 @@ public class MemberServiceImpl implements MemberService {
 		memberVO.setMemberPassword(encodedPwd);
 		memberMapper.registerMember(memberVO);
 		// 회원 가입시 반드시 권한이 등록되도록 트랜잭션처리를 한다
-		Authority authority = new Authority(memberVO.getMemberId(), "ROLE_MEMBER");
-		memberMapper.registerRole(authority);
+		PowerVO powerVO = new PowerVO(memberVO.getMemberId(), "ROLE_MEMBER");
+		memberMapper.registerRole(powerVO);
 	}
 
 	@Override
 	public void updateMember(MemberVO memberVO) {
+		System.out.println("확인용입니다 : "+memberVO);
 		// 변경할 비밀번호를 암호화한다
 		String encodePassword = passwordEncoder.encode(memberVO.getMemberPassword());
 		memberVO.setMemberPassword(encodePassword);
@@ -44,8 +45,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO findMemberById(String id) {
-		return memberMapper.findMemberById(id);
+	public MemberVO findMemberById(String memberId) {
+		return memberMapper.findMemberById(memberId);
 	}
 
 	@Override
@@ -54,8 +55,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberVO> findMemberListByAddress(String address) {
-		return memberMapper.findMemberListByAddress(address);
+	public List<MemberVO> findMemberListByAddress(String memberAddress) {
+		return memberMapper.findMemberListByAddress(memberAddress);
 	}
 
 	@Override
@@ -64,13 +65,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String idcheck(String id) {
-		int count = memberMapper.idcheck(id);
+	public String idcheck(String memberId) {
+		int count = memberMapper.idcheck(memberId);
 		return (count == 0) ? "ok" : "fail";
 	}
 
 	@Override
-	public List<Authority> findAuthorityByUsername(String username) {
+	public List<PowerVO> findAuthorityByUsername(String username) {
 		return memberMapper.findAuthorityByUsername(username);
 	}
 }
