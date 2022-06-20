@@ -16,7 +16,10 @@
 					<input type="password" name="password" size="10" placeholder="비밀번호"><br>
 					<input type="submit" value="로그인">
 				</form>
-				<a text th:href="@{/guest/registerForm}" sec:authorize="isAuthenticated()==false" style = "color:white">회원가입</a>
+
+				<a th:href="@{/guest/registerForm}" sec:authorize="isAuthenticated()==false" style = "color:white">회원가입</a>
+				<a th:href="@{/guest/findIdForm}" sec:authorize="isAuthenticated()==false" style = "color:white">아이디 찾기</a>
+				<a th:href="@{/guest/findPasswordForm}" sec:authorize="isAuthenticated()==false" style = "color:white">비밀번호 찾기</a>				
 				
 				<th:block sec:authorize="isAuthenticated()">
 					<span sec:authentication="principal.memberName" style = "color:white"></span>

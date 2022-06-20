@@ -31,6 +31,53 @@ public class MemberController {
 			return "member/findMemberById_success" ;
 		}
 	}
+	@RequestMapping("guest/findIdForm")
+	//@AuthenticationPrincipal : Spring Security를 통해 로그인한 인증정보를 받아오는 어노테이션 
+	public String findIdForm(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+		model.addAttribute("member", memberVO);
+		return "member/findIdForm";
+	}
+	@RequestMapping("guest/findIdByTel")
+	public String findIdByTel(String memberTel,Model model) {		
+		String id = memberService.findIdByTel(memberTel);
+		if (id == null)
+			return "member/findIdByTel_fail";
+		else {
+			model.addAttribute("memberId",id);
+			return "member/findIdByTel_success" ;
+		}
+	}
+	@RequestMapping("guest/findPasswordForm")
+	//@AuthenticationPrincipal : Spring Security를 통해 로그인한 인증정보를 받아오는 어노테이션 
+	public String findPasswordForm(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+		model.addAttribute("member", memberVO);
+		return "member/findPasswordForm";
+	}
+	@RequestMapping("guest/findPasswordByIdTel")
+	public String findPasswordByIdTel(String memberTel,String memberId,Model model) {
+		MemberVO vo = new MemberVO();
+		vo.setMemberId(memberId);
+		vo.setMemberTel(memberTel);
+		int result = memberService.findPasswordByIdTel(vo);
+		if (result == 0)
+			return "member/findPasswordByIdTel_fail";
+		else {
+			model.addAttribute("memberTel",memberTel);
+			model.addAttribute("memberId",memberId);
+			return "member/findPasswordByIdTel_success" ;
+		}
+	}
+	@PostMapping("guest/updatePassword")
+	public String updatePassword(MemberVO memberVO) {
+		memberService.updatePassword(memberVO);//변경시 service에서 비밀번호를 암호화 한다 
+		return "redirect:/guest/updatePasswordView?memberId=" + memberVO.getMemberId();
+	}
+
+	@RequestMapping("guest/updatePasswordView")
+	public ModelAndView updatePasswordView(String memberId) {
+		MemberVO memberVO = memberService.findMemberById(memberId);
+		return new ModelAndView("member/updatePasswordView-result", "memberVO", memberVO);
+	}
 	//WebSecurityConfig에 등록되어 있음 ( failureUrl("/login_fail") )
 	@RequestMapping("login_fail")
 	public String loginFail() {

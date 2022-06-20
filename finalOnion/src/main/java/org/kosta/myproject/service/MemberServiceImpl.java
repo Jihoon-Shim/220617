@@ -74,4 +74,23 @@ public class MemberServiceImpl implements MemberService {
 	public List<PowerVO> findAuthorityByUsername(String username) {
 		return memberMapper.findAuthorityByUsername(username);
 	}
+
+	@Override
+	public String findIdByTel(String memberTel) {
+		return memberMapper.findIdByTel(memberTel);
+	}
+
+	@Override
+	public int findPasswordByIdTel(MemberVO vo) {
+		return memberMapper.findPasswordByIdTel(vo);
+	}
+
+	@Override
+	@Transactional
+	public void updatePassword(MemberVO memberVO) {
+		// 비밀번호를 bcrypt 알고리즘으로 암호화하여 DB에 저장한다
+		String encodedPwd = passwordEncoder.encode(memberVO.getMemberPassword());
+		memberVO.setMemberPassword(encodedPwd);
+		memberMapper.updatePassword(memberVO);
+	}
 }

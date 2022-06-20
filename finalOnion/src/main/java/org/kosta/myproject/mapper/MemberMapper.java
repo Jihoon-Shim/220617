@@ -26,4 +26,10 @@ public interface MemberMapper {
 
 	void registerRole(PowerVO authority);
 
+	String findIdByTel(String memberTel);
+
+	int findPasswordByIdTel(MemberVO vo);
+
+	void updatePassword(MemberVO memberVO);
+
 }
