@@ -10,6 +10,7 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{layouts/layout}"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
   <div layout:fragment="main">
    	 <h4 th:text="${message}" align = "center">home</h4>
@@ -17,18 +18,18 @@
    	 <div class = "row">
    	 	<div class="col-sm-4">
 			<h4>삽니다 게시판</h4>
-   	 		<br>
-   	 		<img th:src="@{/myweb/images/캡처.PNG}" height = "400" width = "400">
+   	 		<br>   	 		
+   	 		<button type="submit" th:onclick="location.href='/board/buylist'"><img th:src="@{/myweb/images/Buy.PNG}" height = "400" width = "400"></button>
 		</div>
   		<div class="col-sm-4">
 			<h4>팝니다 게시판</h4>
    	 		<br>
-   	 		<img th:src="@{/myweb/images/캡처2.PNG}" height = "400" width = "400">
+   	 		<img th:src="@{/myweb/images/SALE.PNG}" height = "400" width = "400">
 		</div>
 		<div class="col-sm-4">
 			<h4>마이 페이지? 건의사항?</h4>
    	 		<br>
-   	 		<img th:src="@{/myweb/images/캡처3.PNG}" height = "400" width = "400">
+   	 		<img th:src="@{/myweb/images/Chat.PNG}" height = "400" width = "400">
 		</div>
    	 	</div>
    	 	</th:block>
