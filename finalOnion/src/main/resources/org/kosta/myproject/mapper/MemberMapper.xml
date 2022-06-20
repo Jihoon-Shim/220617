@@ -52,6 +52,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM	AUTHORITY
 		WHERE MEMBERID=#{username}
 	</select>
+	<select id="findIdByTel" resultType="string" parameterType="string">
+		SELECT MEMBERID FROM T_MEMBER WHERE MEMBER_TEL=#{value}
+	</select>
+	<select id="findPasswordByIdTel" resultType="int" parameterType="org.kosta.myproject.vo.MemberVO">
+		SELECT COUNT(*) FROM T_MEMBER WHERE MEMBER_TEL=#{memberTel} AND MEMBERID=#{memberId}
+	</select>
+	<update id="updatePassword" parameterType="org.kosta.myproject.vo.MemberVO">
+		update T_MEMBER set MEMBER_PASSWORD=#{memberPassword}
+		where MEMBERID=#{memberId} AND MEMBER_TEL=#{memberTel}
+	</update>
 </mapper>
 
 

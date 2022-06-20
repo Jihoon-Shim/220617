@@ -22,4 +22,10 @@ public interface MemberService {
 	String idcheck(String memberId);
 	
 	List<PowerVO> findAuthorityByUsername(String username);
+
+	String findIdByTel(String memberTel);
+
+	int findPasswordByIdTel(MemberVO vo);
+
+	void updatePassword(MemberVO memberVO);
 }
